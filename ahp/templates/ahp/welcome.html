@@ -1,0 +1,12 @@
+{% block content %}
+    <div>
+        <h1>welcome</h1>
+        <a href="{% url 'add_crit_model' %}">add</a>
+
+        {% for model in models %}
+            <div>
+                <a href="{% url 'crit_model_details' pk=model.pk%}">{{ model.name }}</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

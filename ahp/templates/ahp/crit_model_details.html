@@ -1,0 +1,13 @@
+{% extends 'ahp/base.html' %}
+{% block content %}
+
+    <div>
+        {% for field, value in criteria.get_fields %}
+            {{ value }}
+        {% endfor %}
+    </div>
+
+    <a href="{% url 'modify_criterias' pk=pk%}">modify criteria</a>
+    <a href="{% url 'modify_elements' pk=pk%}">modify elements</a>
+
+{% endblock %}
