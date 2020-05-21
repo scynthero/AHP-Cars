@@ -2,12 +2,32 @@
 {% block content %}
 
     <div>
+        Criteria:
         {% for field, value in criteria.get_fields %}
-            {{ value }}
+            {{ field }} : {{ value }}
         {% endfor %}
     </div>
+    {% for element in elements %}
+    <div>
+        Elements:
+            {% for field, value in element.get_fields %}
+                {% if field == "image" %}
+                    {{ field }} : <img src="/media/{{ value }}" alt="{{ value }}">
+                {% else %}
+                    {{ field }} : {{ value }}
+                {% endif %}
 
-    <a href="{% url 'modify_criterias' pk=pk%}">modify criteria</a>
-    <a href="{% url 'modify_elements' pk=pk%}">modify elements</a>
+            {% endfor %}
+    </div>
+    {% endfor %}
 
+    <form action="{% url 'modify_criterias' pk=pk %}">
+        <input type="submit" value="modify criteria">
+    </form>
+    <form action="{% url 'modify_elements' pk=pk %}">
+        <input type="submit" value="modify elements">
+    </form>
+        <form action="{% url 'solve' pk=pk %}">
+        <input type="submit" value="solve">
+    </form>
 {% endblock %}

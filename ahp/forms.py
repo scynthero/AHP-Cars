@@ -19,4 +19,4 @@ class Element_form(forms.ModelForm):
 
     class Meta:
         model = Element
-        fields = ('crit1', 'crit2','crit3','crit4', 'image',)
+        fields = ('attrib1', 'attrib2','attrib3','attrib4', 'image',)

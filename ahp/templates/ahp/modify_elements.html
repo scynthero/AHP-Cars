@@ -1,4 +1,20 @@
 {% extends 'ahp/base.html' %}
 {% block content %}
+    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    {% for element in elements %}
+        <div>
+            {% for field, value in element.get_fields %}
+                {% if field == "image" %}
+                    {{ field }} : <img src="/media/{{ value }}" alt="{{ value }}">
+                {% else %}
+                    {{ field }} : {{ value }}
+                {% endif %}
+
+            {% endfor %}
+        </div>
+    {% endfor %}
 
 {% endblock %}

@@ -1,11 +1,31 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>AHP Cars</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/marx-css/css/marx.min.css">
+    <link rel="stylesheet" href="{% static 'css/ahp.css' %}">
+    <link rel="shortcut icon" href="{% static 'image/favicon.ico' %}" type="image/x-icon" />
 </head>
 <body>
-{% block content %}
-{% endblock %}
+<header>
+    <a href="/"><img src="{% static 'image/logo.png' %}" alt="AHP Cars Comparator"></a>
+</header>
+<div class="lpane">
+
+</div>
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+<div class="rpane">
+
+</div>
+<footer>
+    <div>Created for ZMWD classes</div>
+    <div>PWR 2k20</div>
+</footer>
 </body>
 </html>
