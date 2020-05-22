@@ -13,10 +13,10 @@ class Criteria_form(forms.ModelForm):
 
     class Meta:
         model = Criteria
-        fields = ('crit1', 'crit2','crit3','crit4',)
+        fields = ('crit1', 'crit2','crit3',)
 
 class Element_form(forms.ModelForm):
 
     class Meta:
         model = Element
-        fields = ('attrib1', 'attrib2','attrib3','attrib4', 'image',)
+        fields = ('name','attrib1', 'attrib2','attrib3','image',)

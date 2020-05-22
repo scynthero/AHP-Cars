@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
+from pyahp import *
+import json
 
 
 # Create your views here.
@@ -66,5 +68,45 @@ def modify_elements(request, pk):
     return render(request, 'ahp/modify_elements.html', {'form': form, 'elements': elements})
 
 
-def solve(request,pk):
-    return render(request, 'ahp/solve.html')
+def solve(request, pk):
+    criteria = Criteria.objects.get(crit_model=pk)
+    elements = Element.objects.filter(crit_model=pk)
+    print(elements)
+    return render(request, 'ahp/solve.html', {'criteria': criteria, 'pk': pk, 'elements':elements})
+
+
+def solver(request, pk):
+    response = request.POST.dict()
+    response.pop('csrfmiddlewaretoken')
+    # here we do matrix for criteria
+    array = [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+    for entry in response:
+        if int(response[entry]) < 0:
+            array[int(entry[1])][int(entry[0])] = abs(int(response[entry]))
+        else:
+            array[int(entry[0])][int(entry[1])] = int(response[entry])
+    for x in range(4):
+        for y in range(4):
+            if array[x][y] == 0:
+                array[x][y] = 1/array[y][x]
+
+    criteria = list(
+        list(Criteria.objects.filter(crit_model=pk).values_list('crit1', 'crit2', 'crit3', 'crit4'))[0])
+    alternatives = list(Element.objects.filter(crit_model=pk).values_list('name', flat=True))
+
+    json_model = json.dumps({"name": "test", "method": "eigenvalue", "criteria": criteria, "subCriteria": {},
+                             "alternatives": alternatives, "preferenceMatrices": {"criteria": array,
+                                                                                  "alternatives:" + criteria[0]: [
+                                                                                      'aaa'],
+                                                                                  "alternatives:" + criteria[1]: [
+                                                                                      'aaa'],
+                                                                                  "alternatives:" + criteria[2]: [
+                                                                                      'aaa'],
+                                                                                  "alternatives:" + criteria[3]: [
+                                                                                      'aaa'],
+                                                                                  }})
+    print(json_model)
+    model = json.loads(json_model)
+    ahp_model = parse(model)
+    priorities = ahp_model.get_priorities()
+    return redirect('crit_model_details', pk=pk)

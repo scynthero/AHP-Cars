@@ -8,4 +8,5 @@ urlpatterns = [
     path('crit_model_details/<int:pk>/modify_criterias/', views.modify_criterias, name='modify_criterias'),
     path('crit_model_details/<int:pk>/modify_elements/', views.modify_elements, name='modify_elements'),
     path('crit_model_details/<int:pk>/solve/', views.solve, name='solve'),
+    path('crit_model_details/<int:pk>/solver/', views.solver, name='solver'),
 ]

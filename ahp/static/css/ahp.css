@@ -46,3 +46,13 @@ header {
 img {
     padding: 10px;
 }
+* {
+    color: white;
+}
+.criteria{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+
+}
