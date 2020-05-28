@@ -1,5 +1,5 @@
 from django.db import models
-
+import itertools
 
 # Create your models here.
 class Crit_model(models.Model):
@@ -45,4 +45,11 @@ class Element(models.Model):
         array = [(field.name, field.value_to_string(self)) for field in Element._meta.fields]
         array.pop(0)
         array.pop(-1)
+        return array
+
+    def get_pairs(self):
+        array = []
+        for pair in itertools.combinations([field.value_to_string(self) for field in Element._meta.fields], 2):
+            array.append((pair))
+
         return array

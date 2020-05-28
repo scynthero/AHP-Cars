@@ -71,14 +71,20 @@ def modify_elements(request, pk):
 def solve(request, pk):
     criteria = Criteria.objects.get(crit_model=pk)
     elements = Element.objects.filter(crit_model=pk)
-    print(elements)
-    return render(request, 'ahp/solve.html', {'criteria': criteria, 'pk': pk, 'elements':elements})
+    # print(elements)
+
+    pairs = []
+    for pair in itertools.combinations([[element.name, [element.attrib1, element.attrib2, element.attrib3, element.image]] for element in elements], 2):
+        pairs.append((pair))
+
+
+    return render(request, 'ahp/solve.html', {'criteria': criteria, 'pk': pk, 'elements':elements, 'pairs':pairs})
 
 
 def solver(request, pk):
     response = request.POST.dict()
     response.pop('csrfmiddlewaretoken')
-    # here we do matrix for criteria
+    # here we create matrix for criteria
     array = [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
     for entry in response:
         if int(response[entry]) < 0:
