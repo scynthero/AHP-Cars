@@ -7,6 +7,7 @@ body {
     grid-template-areas: "hero hero hero" "lpane main rpane" "bot bot bot";
     grid-row-gap: 0px;
     grid-column-gap: 0px;
+
 }
 
 main {
@@ -77,4 +78,14 @@ img {
 .right {
     grid-column-start: 3;
     grid-column-end: 4;
+}
+h1,h2{
+    text-align: center;
+}
+
+.button-container{
+    text-align: center;
+}
+submit{
+      display: inline-block;
 }
