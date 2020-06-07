@@ -18,6 +18,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="R User Library" level="project" />
     <orderEntry type="library" name="R Skeletons" level="application" />
+    <orderEntry type="library" name="marx" level="application" />
   </component>
   <component name="PyDocumentationSettings">
     <option name="format" value="NUMPY" />
