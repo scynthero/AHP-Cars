@@ -1,7 +1,26 @@
 {% extends 'ahp/base.html' %}
 {% block content %}
     <form method="POST" enctype="multipart/form-data">{% csrf_token %}
-        {{ form.as_p }}
+        {#        {{ form.as_p }}#}
+        {% for field in form %}
+            <div class="fieldWrapper">
+                {{ field.errors }}
+                {#                {% for field, value in criteria.get_fields %}#}
+                {#                    <li class="criterias">{{ field }} : {{ value }} </li>#}
+                {#                {% endfor %}#}
+{#                {{ field.label_tag }}#}
+{#                {{ forloop.counter0 }}#}
+                {% if forloop.counter0 == 0 %}Nazwa auta{% endif %}
+                {% if forloop.counter0 == 1 %}{{ criteria.get_fields.0.1 }}{% endif %}
+                {% if forloop.counter0 == 2 %}{{ criteria.get_fields.1.1 }}{% endif %}
+                {% if forloop.counter0 == 3 %}{{ criteria.get_fields.2.1 }}{% endif %}
+                {% if forloop.counter0 == 4 %}Wygląd{% endif %}
+                {{ field }}
+                {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
         <button type="submit">Save</button>
     </form>
     {% for element in elements %}

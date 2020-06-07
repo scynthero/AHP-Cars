@@ -14,11 +14,10 @@ class Criteria(models.Model):
     class Meta():
         db_table = 'Criteria'
 
-    crit1 = models.TextField()
-    crit2 = models.TextField()
-    crit3 = models.TextField()
-
-    crit4 = models.TextField(max_length=5, default="image", editable=False)
+    crit1 = models.TextField("Kryterium 1",max_length=100)
+    crit2 = models.TextField("Kryterium 2",max_length=100)
+    crit3 = models.TextField("Kryterium 3",max_length=100)
+    crit4 = models.TextField("Wygląd", max_length=5, default="image", editable=False)
     crit_model = models.OneToOneField(Crit_model, on_delete=models.CASCADE)
 
     # TODO fix this fucking hack
@@ -37,7 +36,7 @@ class Element(models.Model):
     attrib1 = models.TextField()
     attrib2 = models.TextField()
     attrib3 = models.TextField()
-    image = models.ImageField(upload_to='pictures/')
+    image = models.ImageField("Wygląd",upload_to='pictures/')
     crit_model = models.ForeignKey(Crit_model, on_delete=models.CASCADE)
 
     # TODO fix this fucking hack

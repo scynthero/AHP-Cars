@@ -58,6 +58,7 @@ def modify_criterias(request, pk):
 
 def modify_elements(request, pk):
     elements = Element.objects.filter(crit_model_id=pk).order_by('id')
+    criteria = Criteria.objects.filter(crit_model=pk).first()
     if request.method == "POST":
         form = Element_form(request.POST, request.FILES)
         if form.is_valid():
@@ -67,7 +68,7 @@ def modify_elements(request, pk):
             return redirect('modify_elements', pk=pk)
     else:
         form = Element_form()
-    return render(request, 'ahp/modify_elements.html', {'form': form, 'elements': elements})
+    return render(request, 'ahp/modify_elements.html', {'form': form, 'elements': elements, 'criteria': criteria})
 
 
 def solve(request, pk):
@@ -104,12 +105,10 @@ def solver(request, pk):
         else:
             array[int(entry[0])][int(entry[1])] = int(response[entry])
 
-
     # for x in range(4):
     #     for y in range(4):
     #         if array[x][y] == 0:
     #             array[x][y] = 1 / array[y][x]
-
 
     criteria_dict = {}
     ilosc_par = int(
@@ -131,7 +130,7 @@ def solver(request, pk):
         for x in range(len(alternatives)):
             for y in range(len(alternatives)):
                 if temp_arr[x][y] < 0:
-                    temp_arr[x][y] = 1/abs(temp_arr[x][y])
+                    temp_arr[x][y] = 1 / abs(temp_arr[x][y])
                     temp_arr[y][x] = abs(temp_arr[x][y])
                 elif temp_arr[x][y] == 0:
                     temp_arr[x][y] = 1
