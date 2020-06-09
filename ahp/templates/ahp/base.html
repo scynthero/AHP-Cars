@@ -8,6 +8,34 @@
     <link rel="stylesheet" href="https://unpkg.com/marx-css/css/marx.min.css">
     <link rel="stylesheet" href="{% static 'css/ahp.css' %}">
     <link rel="shortcut icon" href="{% static 'image/favicon.ico' %}" type="image/x-icon" />
+{#    <script>#}
+{#        const allRanges = document.querySelectorAll(".slider");#}
+{#        allRanges.forEach(wrap => {#}
+{#            const range = wrap.querySelector(".center");#}
+{#            const bubble = wrap.querySelector(".bubble");#}
+{##}
+{#            range.addEventListener("input", () => {#}
+{#                setBubble(range, bubble);#}
+{#            });#}
+{#            setBubble(range, bubble);#}
+{#        });#}
+{##}
+{#        function setBubble(range, bubble) {#}
+{#            const val = range.value;#}
+{#            const min = range.min ? range.min : 0;#}
+{#            const max = range.max ? range.max : 100;#}
+{#            const newVal = Number(((val - min) * 100) / (max - min));#}
+{#            bubble.innerHTML = val;#}
+{##}
+{#            // Sorta magic numbers based on size of the native UI thumb#}
+{#            bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;#}
+{#        }#}
+{##}
+{##}
+{#    </script>#}
+    <script>
+
+</script>
 </head>
 <body>
 
@@ -30,31 +58,7 @@
     <div>Created for ZMWD classes</div>
     <div>PWR 2k20</div>
 </footer>
- <script>
-        const allRanges = document.querySelectorAll(".slider");
-        allRanges.forEach(wrap => {
-            const range = wrap.querySelector(".center");
-            const bubble = wrap.querySelector(".bubble");
 
-            range.addEventListener("input", () => {
-                setBubble(range, bubble);
-            });
-            setBubble(range, bubble);
-        });
-
-        function setBubble(range, bubble) {
-            const val = range.value;
-            const min = range.min ? range.min : 0;
-            const max = range.max ? range.max : 100;
-            const newVal = Number(((val - min) * 100) / (max - min));
-            bubble.innerHTML = val;
-
-            // Sorta magic numbers based on size of the native UI thumb
-            bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
-        }
-
-
-    </script>
 </body>
 
 </html>

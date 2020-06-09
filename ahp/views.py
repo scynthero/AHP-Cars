@@ -153,13 +153,14 @@ def solver(request, pk):
                                                                                   }})
     print(json_model)
     model = json.loads(json_model)
-    # try:
-    #     ahp_model = parse(model)
-    #     priorities = ahp_model.get_priorities()
-    # except AssertionError as error:
-    #     print(error)
+    try:
+        ahp_model = parse(model)
+        priorities = ahp_model.get_priorities()
+        print(priorities)
+    except AssertionError as error:
+        print(error)
     # priorities = ahp_model.get_priorities()
-    ahp_model = parse(model)
-    priorities = ahp_model.get_priorities()
-    print(priorities)
+    # ahp_model = parse(model)
+    # priorities = ahp_model.get_priorities()
+    # print(priorities)
     return redirect('crit_model_details', pk=pk)
