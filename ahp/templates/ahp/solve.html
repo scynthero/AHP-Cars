@@ -4,8 +4,8 @@
     <p>Change the position of sliders to define which criteria is more important to you.</p>
     <form method="POST" action="/crit_model_details/{{ pk }}/solver/"> {% csrf_token %}
         <div class="criteria">
-            <p>{{ criteria.crit1 }}</p> <input type="range" class="slider" name="01" min="-9" max="9" step="1"
-                                               value="0">
+            <p>{{ criteria.crit1 }}</p> <input type="range" class="slider" name="01" min="-9" max="9" step="1">
+
             <p>{{ criteria.crit2 }}</p>
             <p>{{ criteria.crit1 }}</p> <input type="range" class="slider" name="02" min="-9" max="9" step="1"
                                                value="0">

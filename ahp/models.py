@@ -7,7 +7,7 @@ class Crit_model(models.Model):
         db_table = 'Criteria Model'
 
     name = models.TextField()
-    decision = models.TextField()
+    decision = models.TextField(default='[["0"]]')
 
 
 class Criteria(models.Model):

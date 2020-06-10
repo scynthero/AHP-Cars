@@ -18,13 +18,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="R User Library" level="project" />
-    <orderEntry type="library" name="R Skeletons" level="application" />
-    <orderEntry type="library" name="marx" level="application" />
-  </component>
-  <component name="PyDocumentationSettings">
-    <option name="format" value="NUMPY" />
-    <option name="myDocStringFormat" value="NumPy" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
@@ -33,8 +26,5 @@
         <option value="$MODULE_DIR$/ahp/templates" />
       </list>
     </option>
-  </component>
-  <component name="TestRunnerService">
-    <option name="PROJECT_TEST_RUNNER" value="pytest" />
   </component>
 </module>

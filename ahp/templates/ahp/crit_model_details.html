@@ -2,23 +2,35 @@
 {% block content %}
 
     <div class="center-container">
-    <div class="criteria-container">
-        <h3>Criteria based on which you will be evaluating cars </h3>
+    <h4>Final results! Car with the highest number on the list is best suited for your needs. </h4>
+    <ol>
+        {% for element in decision %}
+            {% if element.0 == "0" %}
+                No decision yet
+            {% else %}
+                <li> {{ element.0 }}: {{ element.1 }}</li>
+            {% endif %}
 
-        <ul class="criterias">
-            {% for field, value in criteria.get_fields %}
-                <li class="criterias">{{ field }} : {{ value }} </li>
-            {% endfor %}
-        </ul>
-        <form action="{% url 'modify_criterias' pk=pk %}">
-            <input type="submit" value="Modify criteria">
-        </form>
-    </div>
-    <hr>
+        {% endfor %}
+    </ol>
+        <hr>
+        <div class="criteria-container">
+            <h3>Criteria based on which you will be evaluating cars </h3>
+
+            <ul class="criterias">
+                {% for field, value in criteria.get_fields %}
+                    <li class="criterias">{{ field }} : {{ value }} </li>
+                {% endfor %}
+            </ul>
+            <form action="{% url 'modify_criterias' pk=pk %}">
+                <input type="submit" value="Modify criteria">
+            </form>
+        </div>
+        <hr>
         <h3>Chosen cars</h3>
 
-            {% for element in elements %}
-                        <div class="attributes">
+        {% for element in elements %}
+            <div class="attributes">
                 <div class="image">
                     {% for field, value in element.get_fields %}
                         {% if field == "image" %}
@@ -33,14 +45,14 @@
                         {% endif %}
                     {% endfor %}
                 </ul>
-                        </div>
-            {% endfor %}
+            </div>
+        {% endfor %}
 
 
         <form action="{% url 'modify_elements' pk=pk %}">
             <input type="submit" value="Modify elements">
         </form>
-    <hr>
+        <hr>
         <form action="{% url 'solve' pk=pk %}">
             <input type="submit" class="solve" value="SOLVE">
         </form>

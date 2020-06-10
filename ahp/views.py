@@ -27,7 +27,13 @@ def welcome(request):
 def crit_model_details(request, pk):
     criteria = Criteria.objects.filter(crit_model=pk).first()
     elements = Element.objects.filter(crit_model=pk).order_by('id')
-    return render(request, 'ahp/crit_model_details.html', {'criteria': criteria, 'pk': pk, 'elements': elements})
+    decision = json.loads(Crit_model.objects.filter(id=pk).values('decision')[0]['decision'])
+
+
+    print(decision)
+    for element in decision:
+        print(element[0])
+    return render(request, 'ahp/crit_model_details.html', {'criteria': criteria, 'pk': pk, 'elements': elements, 'decision': decision})
 
 
 def modify_criterias(request, pk):
@@ -140,7 +146,7 @@ def solver(request, pk):
     print(criteria_dict)
 
     # print(enumerated_alternatives)
-    json_model = json.dumps({"name": "test", "method": "geometric", "criteria": criteria, "subCriteria": {},
+    json_model = json.dumps({"name": "test", "method": "approximate", "criteria": criteria, "subCriteria": {},
                              "alternatives": alternatives, "preferenceMatrices": {"criteria": array,
                                                                                   "alternatives:" + criteria[0]:
                                                                                       criteria_dict['crit1'],
@@ -153,14 +159,16 @@ def solver(request, pk):
                                                                                   }})
     print(json_model)
     model = json.loads(json_model)
-    try:
-        ahp_model = parse(model)
-        priorities = ahp_model.get_priorities()
-        print(priorities)
-    except AssertionError as error:
-        print(error)
+    # try:
+    #     ahp_model = parse(model)
+    #     priorities = ahp_model.get_priorities()
+    #     print(priorities)
+    # except AssertionError as error:
+    #     print(error)
     # priorities = ahp_model.get_priorities()
-    # ahp_model = parse(model)
-    # priorities = ahp_model.get_priorities()
-    # print(priorities)
+    ahp_model = parse(model)
+    priorities = ahp_model.get_priorities()
+    result = list(zip(alternatives, priorities))
+    Crit_model.objects.filter(id=pk).update(decision = json.dumps(result))
+    print(result)
     return redirect('crit_model_details', pk=pk)
