@@ -1,7 +1,10 @@
 {% extends 'ahp/base.html' %}
 {% block content %}
-    <form method="POST">{% csrf_token %}
-        {{ form.as_p }}
+    <div class="form-container">
+    <form method="POST">
+        {% csrf_token %}
+        <p>{{ form.as_p }}</p>
         <button type="submit">Save</button>
     </form>
+    </div>
 {% endblock %}

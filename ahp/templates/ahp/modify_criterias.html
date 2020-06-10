@@ -2,6 +2,7 @@
 {% block content %}
     <form method="POST">{% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Save</button>
+        <div class="center-container">
+            <button type="submit">Save</button></div>
     </form>
 {% endblock %}

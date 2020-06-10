@@ -1,20 +1,49 @@
 {% extends 'ahp/base.html' %}
 {% block content %}
+    <h4>Enter information about chosen car</h4>
     <form method="POST" enctype="multipart/form-data">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
-    </form>
-    {% for element in elements %}
-        <div>
-            {% for field, value in element.get_fields %}
-                {% if field == "image" %}
-                    {{ field }} : <img src="/media/{{ value }}" alt="{{ value }}">
-                {% else %}
-                    {{ field }} : {{ value }}
+        {#        {{ form.as_p }}#}
+        {% for field in form %}
+            <div class="fieldWrapper">
+                {{ field.errors }}
+                {#                {% for field, value in criteria.get_fields %}#}
+                {#                    <li class="criterias">{{ field }} : {{ value }} </li>#}
+                {#                {% endfor %}#}
+{#                {{ field.label_tag }}#}
+{#                {{ forloop.counter0 }}#}
+                {% if forloop.counter0 == 0 %}Nazwa auta:{% endif %}
+                {% if forloop.counter0 == 1 %}{{ criteria.get_fields.0.1 }}:{% endif %}
+                {% if forloop.counter0 == 2 %}{{ criteria.get_fields.1.1 }}:{% endif %}
+                {% if forloop.counter0 == 3 %}{{ criteria.get_fields.2.1 }}:{% endif %}
+                {% if forloop.counter0 == 4 %}Wygląd:{% endif %}
+                {{ field }}
+                {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
                 {% endif %}
-
+            </div>
+        {% endfor %}
+    <div class="center-container">
+        <button type="submit">Save</button></div>
+    </form>
+    <hr>
+    <h4>List of given cars</h4>
+               {% for element in elements %}
+                        <div class="attributes">
+                <div class="image">
+                    {% for field, value in element.get_fields %}
+                        {% if field == "image" %}
+                            <img class="element" src="/media/{{ value }}" alt="{{ value }}">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <ul class="description">
+                    {% for field, value in element.get_fields %}
+                        {% if field != "image" %}
+                            <li>{{ field }} : {{ value }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                        </div>
             {% endfor %}
-        </div>
-    {% endfor %}
 
 {% endblock %}
