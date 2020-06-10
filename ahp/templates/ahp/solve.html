@@ -1,27 +1,57 @@
 {% extends 'ahp/base.html' %}
 {% block content %}
+
     <h4>Criteria evaluation</h4>
-    <p>Change the position of sliders to define which criteria is more important to you.</p>
+    <p>Change the position of sliders to define which criteria is more important to you. Negative values indicate that you prefer car on your left, positive values on thr right.</p>
+    <div class="scale"><h6>Scale meaning</h6>
+   <div class="center-container"> <ul>
+    <li>0 or 1 - equal importance </li>
+    <li>3 - moderate importance </li>
+    <li>5 - strong importance </li>
+    <li>7 - very strong importance </li>
+    <li>9 - extreme importance </li>
+    </ul></div></div>
     <form method="POST" action="/crit_model_details/{{ pk }}/solver/"> {% csrf_token %}
         <div class="criteria">
-            <p>{{ criteria.crit1 }}</p> <input type="range" class="slider" name="01" min="-9" max="9" step="1">
+            <p>{{ criteria.crit1 }}</p>
+            <div class ="output">
+                <input type="range" id="ageInputId01" class="slider" name="01" min="-9" max="9"
+                       step="1" oninput="ageOutputId01.value = ageInputId01.value">
+                <output id="ageOutputId01">0</output>
+            </div>
 
             <p>{{ criteria.crit2 }}</p>
-            <p>{{ criteria.crit1 }}</p> <input type="range" class="slider" name="02" min="-9" max="9" step="1"
-                                               value="0">
+            <p>{{ criteria.crit1 }}</p>
+            <div class="output"><input type="range" id="ageInputId02" class="slider" name="02" min="-9" max="9" step="1"
+                        value="0" oninput="ageOutputId02.value = ageInputId02.value">
+                <output id="ageOutputId02">0</output>
+            </div>
             <p>{{ criteria.crit3 }}</p>
-            <p>{{ criteria.crit1 }}</p> <input type="range" class="slider" name="03" min="-9" max="9" step="1"
-                                               value="0">
+            <p>{{ criteria.crit1 }}</p>
+            <div class="output"><input type="range" id="ageInputId03" class="slider" name="03" min="-9" max="9" step="1"
+                        value="0" oninput="ageOutputId03.value = ageInputId03.value">
+                <output id="ageOutputId03">0</output>
+            </div>
             <p>{{ criteria.crit4 }}</p>
-            <p>{{ criteria.crit2 }}</p> <input type="range" class="slider" name="12" min="-9" max="9" step="1"
-                                               value="0">
+            <p>{{ criteria.crit2 }}</p>
+            <div class="output"><input type="range" id="ageInputId12" class="slider" name="12" min="-9" max="9" step="1"
+                        value="0" oninput="ageOutputId12.value = ageInputId12.value">
+                <output id="ageOutputId12">0</output>
+            </div>
             <p>{{ criteria.crit3 }}</p>
-            <p>{{ criteria.crit2 }}</p> <input type="range" class="slider" name="13" min="-9" max="9" step="1"
-                                               value="0">
+            <p>{{ criteria.crit2 }}</p>
+            <div class="output"><input type="range" id="ageInputId13" class="slider" name="13" min="-9" max="9" step="1"
+                        value="0" oninput="ageOutputId13.value = ageInputId13.value">
+                <output id="ageOutputId13">0</output>
+            </div>
             <p>{{ criteria.crit4 }}</p>
-            <p>{{ criteria.crit3 }} </p><input type="range" class="slider" name="23" min="-9" max="9" step="1"
-                                               value="0">
+            <p>{{ criteria.crit3 }} </p>
+            <div class="output"><input type="range" id="ageInputId23" class="slider" name="23" min="-9" max="9" step="1"
+                        value="0" oninput="ageOutputId23.value = ageInputId23.value">
+                <output id="ageOutputId23">0</output>
+            </div>
             <p>{{ criteria.crit4 }}</p>
+
         </div>
         {#        <div>#}
         {#            {% for element in elements %}#}
@@ -37,12 +67,20 @@
         {#        </div>#}
         <h4>Cars evaluation</h4>
         <p>Change the position of sliders to define which car you prefer with respect to criterion written above the
-            slider</p>
+            slider</p><div class="scale">
+    <h6>Scale meaning</h6>
+   <div class="center-container"> <ul>
+    <li>0 or 1 - equal importance </li>
+    <li>3 - moderate importance </li>
+    <li>5 - strong importance </li>
+    <li>7 - very strong importance </li>
+    <li>9 - extreme importance </li>
+    </ul></div></div>
         <div class="elements">
             {% for field, value in criteria.get_fields %}
 
                 <div class="center">{{ value }}</div>
-                {#                {{ forloop.counter }}#}
+
                 {% for pair in pairs %}
                     <div class="left">
                         {{ pair.0.0 }}:
@@ -66,13 +104,15 @@
                     <div class="slider">
 
 
-                        <input type="range" class="center" name="{{ field }}#{{ pair.0.0 }}#{{ pair.1.0 }}" min="-9"
-                               max="9" step="1"
-                               value="0">
+                        <div class ="output"><input type="range" class="slider" id="{{ field }}{{ forloop.counter }}"
+                                    name="{{ field }}#{{ pair.0.0 }}#{{ pair.1.0 }}" min="-9"
+                                    max="9" step="1"
+                                    value="0" oninput="o{{ field }}{{ forloop.counter }}.value =
+                                {{ field }}{{ forloop.counter }}.value">
 
+                            <output id="o{{ field }}{{ forloop.counter }}">0</output>
+                        </div>
 
-
-{#                        <output class="bubble"></output>#}
 
                     </div>
                     <div class="right">

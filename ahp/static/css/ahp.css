@@ -87,7 +87,7 @@ hr{
     background-color: rgba(255,255,255,.25);
 }
 
-h1, h4,h3,p {
+h1, h4,h3,p ,h6{
     text-align: center;
     text-justify: inter-word;
 
@@ -194,7 +194,7 @@ img {
 
 .slider{
       position: relative;
-  margin: 0 auto 3rem;
+
 
 }
 .bubble {
@@ -226,4 +226,16 @@ img {
 }
 span{
     margin-right: 15px;
+}
+.output{
+    margin-bottom: 30px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+output{
+        color:#d33847;
+}
+.scale{
+    border: 2px dotted #d33847;
+    margin:20px;
 }
